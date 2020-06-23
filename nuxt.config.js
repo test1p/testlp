@@ -92,10 +92,10 @@ export default {
     },
     generate: {
         routes: async function () {
-            var layout = await axios.$get(`https://testlp.microcms.io/api/v1/layout?depth=3`, {
+            var layout = await axios.get(`https://testlp.microcms.io/api/v1/layout?depth=3`, {
                 headers: { 'X-API-KEY': '000a5261-24c3-4f70-b87b-0d68d2ff256a' }
             })
-            layout = layout.contents[0]
+            layout = layout.data.contents[0]
             var sections = layout.layout
             layout = {
                 header: {
