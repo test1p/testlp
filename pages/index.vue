@@ -246,11 +246,12 @@
 
 export default {
     async asyncData ({ payload }) {
-        if(payload)
-        return {
-            sections: payload.sections,
-            menus: payload.menus,
-            layout: payload.layout
+        if(payload) {
+            return {
+                sections: payload.sections,
+                menus: payload.menus,
+                layout: payload.layout
+            }
         }
     },
     data() {
