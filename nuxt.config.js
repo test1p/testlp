@@ -119,14 +119,14 @@ export default {
                 }
             })
             menus = menus.filter(x => x)
-            return {
+            return [{
                 route: '/',
                 payload:{
                     sections: sections,
                     menus: menus,
                     layout: layout
                 }
-            }
+            }]
         }
     }
 }
