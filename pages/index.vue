@@ -243,6 +243,7 @@
 </template>
 
 <script>
+
 export default {
     layout: 'test',
     async asyncData ({ app }) {
