@@ -244,12 +244,46 @@
 
 <script>
 export default {
-    async asyncData ({ payload }) {
+    async asyncData ({ payload, app }) {
         if(payload) {
             return {
                 sections: payload.sections,
                 menus: payload.menus,
                 layout: payload.layout
+            }
+        }
+        else if(process.env.NODE_ENV !== 'production') {
+            var layout = await app.$axios.$get(`https://testlp.microcms.io/api/v1/layout?depth=3`, {
+                headers: { 'X-API-KEY': '000a5261-24c3-4f70-b87b-0d68d2ff256a' }
+            })
+            layout = layout.contents[0]
+            var sections = layout.layout
+            layout = {
+                header: {
+                    title: layout.title,
+                    logo: layout.logo,
+                    bgColor: layout.bgColorH,
+                    txtColor: layout.txtColorH
+                },
+                footer: {
+                    copyright: layout.copyright,
+                    bgColor: layout.bgColorF,
+                    txtColor: layout.txtColorF
+                }
+            }
+            var menus = sections.map((x, i) => {
+                if (x.menu) {
+                    return {
+                        id: i,
+                        title: x.contents[0].title
+                    }
+                }
+            })
+            menus = menus.filter(x => x)
+            return {
+                    sections: sections,
+                    menus: menus,
+                    layout: layout
             }
         }
     },
