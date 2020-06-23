@@ -68,6 +68,7 @@ export default {
     ** https://github.com/nuxt-community/vuetify-module
     */
     vuetify: {
+        defaultAssets: false,
         customVariables: ['~/assets/variables.scss'],
         theme: {
             dark: false,
