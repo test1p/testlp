@@ -243,7 +243,6 @@
 </template>
 
 <script>
-
 export default {
     async asyncData ({ payload }) {
         if(payload) {
