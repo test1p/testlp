@@ -42,7 +42,7 @@
               v-on="on"
               icon
             >
-                <v-icon>mdi-menu</v-icon>
+                <v-icon large>mdi-menu</v-icon>
             </v-btn>
           </template>
           <v-list>
@@ -174,6 +174,45 @@
                                     {{ section.section.btnLabel }}
                                 </v-btn>
                             </v-col>
+                            <v-col
+                                v-if="section.section.contact"
+                                cols="12"
+                                sm="8"
+                                md="6"
+                            >
+                                <v-form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                                    <input type="hidden" name="form-name" value="contact">
+                                    <v-text-field
+                                        v-model="name"
+                                        label="名前"
+                                        name="name"
+                                    ></v-text-field>
+                                    <v-text-field
+                                        v-model="email"
+                                        label="メールアドレス"
+                                        name="email"
+                                    ></v-text-field>
+                                    <v-textarea
+                                        v-model="content"
+                                        label="内容"
+                                        name="content"
+                                        outlined
+                                    ></v-textarea>
+                                    <v-text-field
+                                        v-model="botField"
+                                        label="人間は入力しないでください"
+                                        name="bot-field"
+                                        v-show="false"
+                                    />
+                                    <v-btn
+                                        type="submit"
+                                        color="postTitleBg"
+                                        class="postTitleTxt--text"
+                                    >
+                                        送信
+                                    </v-btn>
+                                </v-form>
+                            </v-col>
                         </v-row>
                     </v-container>
                 </v-sheet>
@@ -243,7 +282,11 @@ export default {
     },
     data() {
         return {
-            scroll: false
+            scroll: false,
+            name: '',
+            email: '',
+            content: '' ,
+            botField: ''
         }
     },
     methods: {
