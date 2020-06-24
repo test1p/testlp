@@ -99,7 +99,7 @@
                                         md="4"
                                         v-for="(item,i) in section.section.item"
                                         :key="i"
-                                        class="align-self-stretch"
+                                        class="align-self-stretch px-4 px-sm-3"
                                     >
                                         <v-card
                                             v-if="item.contents"
