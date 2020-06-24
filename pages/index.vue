@@ -20,7 +20,7 @@
               
                 <v-toolbar-title
                     v-if="layout.header.title"
-                    :class="`${layout.header.txtColor}--text`"
+                    :style="`color: ${layout.header.txtColor};`"
                 >
                     {{ layout.header.title }}
                 </v-toolbar-title>
@@ -63,7 +63,7 @@
                 @click="move(menu.id)"
                 color="transparent"
                 :small="$vuetify.breakpoint.sm"
-                :class="`${layout.header.txtColor}--text`"
+                :style="`color: ${layout.header.txtColor};`"
                 depressed
             >
                 <span>{{ menu.title }}</span>
@@ -76,7 +76,7 @@
             <div v-if="section.menu" :id="`menu${i}`"></div>
             <v-img
                 :src="(section.section.bgImg)? section.section.bgImg.url : undefined"
-                :height="(section.section.type=='t')? '100vh' : undefined"
+                :min-height="(section.section.max)? '100vh' : undefined"
             >
                 <v-sheet
                     :color="(section.section.bgColor)? section.section.bgColor : 'transparent'"
@@ -91,16 +91,16 @@
                                 cols="12"
                                 sm="10"
                             ></v-col>
-                            <template v-if="section.section.type=='3c'">
-                                <template v-if="section.section.item">
-                                    <v-col
-                                        cols="12"
-                                        sm="8"
-                                        md="4"
-                                        v-for="(item,i) in section.section.item"
-                                        :key="i"
-                                        class="align-self-stretch px-4 px-sm-3"
-                                    >
+                            <template v-if="section.section.item">
+                                <v-col
+                                    cols="12"
+                                    :sm="(section.section.col)? 8 : 6"
+                                    :md="(section.section.col)? 4 : 6"
+                                    v-for="(item,i) in section.section.item"
+                                    :key="i"
+                                    :class="(item.card)? 'align-self-stretch px-4 px-sm-3' : 'align-self-stretch px-4 px-sm-0 py-0'"
+                                >
+                                    <template v-if="item.card">
                                         <v-card
                                             v-if="item.contents"
                                             color="transparent"
@@ -113,105 +113,55 @@
                                                     width="100%"
                                                     height="100%"
                                                     class="pa-10"
-                                                >
-                                                    
-                                                </v-sheet>
+                                                ></v-sheet>
                                             </v-img>
                                         </v-card>
-                                    </v-col>
-                                </template>
-                            </template>
-                            <template v-else-if="section.section.type=='2t'">
-                                <template v-if="section.section.item">
-                                    <v-col
-                                        cols="12"
-                                        sm="6"
-                                        v-for="(item,i) in section.section.item"
-                                        :key="i"
-                                        class="px-3 px-sm-0 py-0 align-self-stretch"
-                                    >
+                                    </template>
+                                    <template v-else>
                                         <v-img :src="(item.bgImg)? item.bgImg.url : undefined" width="100%" height="100%">
-                                        <v-sheet
-                                            :color="(item.bgColor)? item.bgColor : undefined"
-                                            height="100%"
-                                            width="100%"
-                                            class="d-flex"
-                                            tile
-                                        >
-                                            <v-card
-                                                v-if="item.contents"
-                                                v-html="item.contents"
-                                                color="transparent"
-                                                class="ma-auto"
-                                                flat
+                                            <v-sheet
+                                                :color="(item.bgColor)? item.bgColor : undefined"
+                                                height="100%"
+                                                width="100%"
+                                                class="d-flex"
                                                 tile
                                             >
-                                            </v-card>
-                                        </v-sheet>
+                                                <v-card
+                                                    v-if="item.contents"
+                                                    v-html="item.contents"
+                                                    color="transparent"
+                                                    class="ma-auto pa-10"
+                                                    flat
+                                                    tile
+                                                ></v-card>
+                                            </v-sheet>
                                         </v-img>
-                                    </v-col>
-                                </template>
+                                    </template>
+                                </v-col>
                             </template>
-                            <template v-else-if="section.section.type=='3t'">
-                                <template v-if="section.section.item">
-                                    <v-col
-                                        cols="12"
-                                        md="4"
-                                        v-for="(item,i) in section.section.item"
+                            <v-col v-if="section.section.carousel != ''" cols="12" sm="8" md="6">
+                                <v-carousel hide-delimiters cycle interval="3000" height="auto">
+                                    <v-carousel-item
+                                        v-for="(slide,i) in section.section.carousel"
                                         :key="i"
-                                        class="px-3 px-sm-0 py-0 align-self-stretch"
-                                    >
-                                        <v-img :src="(item.bgImg)? item.bgImg.url : undefined" width="100%" height="100%">
-                                        <v-sheet
-                                            :color="(item.bgColor)? item.bgColor : undefined"
-                                            height="100%"
-                                            width="100%"
-                                            class="d-flex"
-                                            tile
-                                        >
-                                            <v-card
-                                                v-if="item.contents"
-                                                v-html="item.contents"
-                                                color="transparent"
-                                                class="ma-auto"
-                                                flat
-                                                tile
-                                            >
-                                            </v-card>
-                                        </v-sheet>
-                                        </v-img>
-                                    </v-col>
-                                </template>
-                            </template>
-                            <template v-else-if="section.section.type=='i'">
-                                <v-col cols="12" sm="8" md="6">
-                                    <v-carousel hide-delimiters cycle interval="3000" height="auto">
-                                        <v-carousel-item
-                                            v-for="(slide,i) in section.section.carousel"
-                                            :key="i"
-                                            :src="(slide.img)? slide.img.url : undefined"
-                                        ></v-carousel-item>
-                                    </v-carousel>
-                                </v-col>
-                            </template>
-                            <template v-else-if="section.section.type=='m'">
-                                <v-col v-if="section.section.movie" cols="12" sm="8" md="6">
-                                    <div style="width: 100%;padding-bottom: 56.25%;height: 0px;position: relative;">
-                                        <iframe
-                                            style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);-webkit-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);"
-                                            width="100%"
-                                            height="100%"
-                                            title="Movie"
-                                            :src="`https://www.youtube.com/embed/${section.section.movie}`"
-                                            frameborder="0"
-                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen
-                                        ></iframe>
-                                    </div>
-                                </v-col>
-                            </template>
-                            <template v-else>
-                            </template>
+                                        :src="(slide.img)? slide.img.url : undefined"
+                                    ></v-carousel-item>
+                                </v-carousel>
+                            </v-col>
+                            <v-col v-if="section.section.movie" cols="12" sm="8" md="6">
+                                <div style="width: 100%;padding-bottom: 56.25%;height: 0px;position: relative;">
+                                    <iframe
+                                        style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);-webkit-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);"
+                                        width="100%"
+                                        height="100%"
+                                        title="Movie"
+                                        :src="`https://www.youtube.com/embed/${section.section.movie}`"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                    ></iframe>
+                                </div>
+                            </v-col>
                             <v-col
                                 v-if="section.section.btnLabel&&section.section.btnLink"
                                 cols="12"
@@ -233,7 +183,11 @@
     <v-footer padless :color="layout.footer.bgColor">
         <v-sheet tile width="100%" color="transparent">
             <v-row class="mx-0 justify-center">
-                <v-col cols="auto" :class="`${layout.footer.txtColor}--text caption`">
+                <v-col
+                    cols="auto"
+                    class="caption"
+                    :style="`color: ${layout.footer.txtColor};`"
+                >
                     {{ layout.footer.copyright }}
                 </v-col>
             </v-row>
@@ -262,13 +216,13 @@ export default {
                 header: {
                     title: layout.title,
                     logo: layout.logo,
-                    bgColor: layout.bgColorH,
-                    txtColor: layout.txtColorH
+                    bgColor: (layout.bgColorH)? layout.bgColorH : 'blue',
+                    txtColor: (layout.txtColorH)? layout.txtColorH : 'white'
                 },
                 footer: {
                     copyright: layout.copyright,
-                    bgColor: layout.bgColorF,
-                    txtColor: layout.txtColorF
+                    bgColor: (layout.bgColorF)? layout.bgColorF : 'blue',
+                    txtColor: (layout.txtColorF)? layout.txtColorF : 'white'
                 }
             }
             var menus = sections.map((x, i) => {

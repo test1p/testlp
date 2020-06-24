@@ -17,8 +17,7 @@ export default {
     ** See https://nuxtjs.org/api/configuration-head
     */
     head: {
-        titleTemplate: '%s - ' + process.env.npm_package_name,
-        title: process.env.npm_package_name || '',
+        title: 'スマホでHP',
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -32,6 +31,7 @@ export default {
     ** Global CSS
     */
     css: [
+        '~~/font/dist/css/materialdesignicons.css'
     ],
     /*
     ** Plugins to load before mounting the App
@@ -102,13 +102,13 @@ export default {
                 header: {
                     title: layout.title,
                     logo: layout.logo,
-                    bgColor: layout.bgColorH,
-                    txtColor: layout.txtColorH
+                    bgColor: (layout.bgColorH)? layout.bgColorH : 'blue',
+                    txtColor: (layout.txtColorH)? layout.txtColorH : 'white'
                 },
                 footer: {
                     copyright: layout.copyright,
-                    bgColor: layout.bgColorF,
-                    txtColor: layout.txtColorF
+                    bgColor: (layout.bgColorF)? layout.bgColorF : 'blue',
+                    txtColor: (layout.txtColorF)? layout.txtColorF : 'white'
                 }
             }
             var menus = sections.map((x, i) => {
