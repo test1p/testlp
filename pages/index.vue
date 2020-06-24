@@ -275,7 +275,7 @@ export default {
                 if (x.menu) {
                     return {
                         id: i,
-                        title: x.contents[0].title
+                        title: x.section.title
                     }
                 }
             })
