@@ -10,5 +10,9 @@
   {
     "name": "chevron-right",
     "codepoint": "F0142"
+  },
+  {
+    "name": "circle",
+    "codepoint": "F0765"
   }
 ]

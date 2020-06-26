@@ -30,6 +30,10 @@
   content: "\F0142";
 }
 
+.mdi-circle::before {
+  content: "\F0765";
+}
+
 .mdi-blank::before {
   content: "\F68C";
   visibility: hidden;
