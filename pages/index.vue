@@ -92,62 +92,133 @@
                                 sm="10"
                             ></v-col>
                             <template v-if="section.section.item">
-                                <v-col
-                                    cols="12"
-                                    :sm="(section.section.col)? 8 : 6"
-                                    :md="(section.section.col)? 4 : 6"
-                                    v-for="(item,i) in section.section.item"
-                                    :key="i"
-                                    :class="(item.card)? 'align-self-stretch px-4 px-sm-3' : 'align-self-stretch px-4 px-sm-0 py-0'"
-                                >
-                                    <template v-if="item.card">
-                                        <v-card
-                                            v-if="item.contents"
-                                            color="transparent"
-                                            height="100%"
+                                <template v-if="section.section.slide">
+                                    <v-col cols="12" sm="8" md="6">
+                                        <v-carousel
+                                            cycle
+                                            height="auto"
+                                            show-arrows-on-hover
+                                            hide-delimiter-background
                                         >
-                                            <v-img :src="(item.bgImg)? item.bgImg.url : undefined" width="100%" height="100%">
-                                                <v-sheet
-                                                    v-html="item.contents"
-                                                    :color="(item.bgColor)? item.bgColor : undefined"
-                                                    width="100%"
-                                                    height="100%"
-                                                    class="pa-10"
-                                                ></v-sheet>
-                                            </v-img>
-                                        </v-card>
-                                    </template>
-                                    <template v-else>
-                                        <v-img :src="(item.bgImg)? item.bgImg.url : undefined" width="100%" height="100%">
-                                            <v-sheet
-                                                :color="(item.bgColor)? item.bgColor : undefined"
-                                                height="100%"
-                                                width="100%"
-                                                class="d-flex"
-                                                tile
+                                            <v-carousel-item
+                                                v-for="(item,i) in section.section.item"
+                                                :key="i"
                                             >
                                                 <v-card
-                                                    v-if="item.contents"
-                                                    v-html="item.contents"
                                                     color="transparent"
-                                                    class="ma-auto pa-10"
-                                                    flat
-                                                    tile
-                                                ></v-card>
-                                            </v-sheet>
-                                        </v-img>
+                                                    class="ma-2"
+                                                    :flat="!item.card"
+                                                    :tile="!item.card"
+                                                >
+                                                    <v-img :src="(item.bgImg)? item.bgImg.url : undefined" width="100%" height="100%">
+                                                        <v-sheet
+                                                            v-if="item.contents"
+                                                            v-html="item.contents"
+                                                            :color="(item.bgColor)? item.bgColor : 'transparent'"
+                                                            width="100%"
+                                                            height="100%"
+                                                            class="pa-10"
+                                                        ></v-sheet>
+                                                    </v-img>
+                                                </v-card>
+                                            </v-carousel-item>
+                                        </v-carousel>
+                                    </v-col>
+                                </template>
+                                <template v-else>
+                                    <template v-for="item in section.section.item">
+                                        <v-col
+                                            v-if="!item.expand"
+                                            cols="12"
+                                            :sm="(section.section.col)? 8 : 6"
+                                            :md="(section.section.col)? 4 : 6"
+                                            :class="(item.card)? 'align-self-stretch px-4 px-sm-3' : 'align-self-stretch px-4 px-sm-0 py-0'"
+                                        >
+                                            <template v-if="item.card">
+                                                <v-card
+                                                    color="transparent"
+                                                    height="100%"
+                                                >
+                                                    <v-img :src="(item.bgImg)? item.bgImg.url : undefined" width="100%" height="100%">
+                                                        <v-sheet
+                                                            v-if="item.contents"
+                                                            v-html="item.contents"
+                                                            :color="(item.bgColor)? item.bgColor : 'transparent'"
+                                                            width="100%"
+                                                            height="100%"
+                                                            class="pa-10"
+                                                        ></v-sheet>
+                                                    </v-img>
+                                                </v-card>
+                                            </template>
+                                            <template v-else>
+                                                <v-img :src="(item.bgImg)? item.bgImg.url : undefined" width="100%" height="100%">
+                                                    <v-sheet
+                                                        :color="(item.bgColor)? item.bgColor : 'transparent'"
+                                                        height="100%"
+                                                        width="100%"
+                                                        class="d-flex"
+                                                        tile
+                                                    >
+                                                        <v-card
+                                                            v-if="item.contents"
+                                                            v-html="item.contents"
+                                                            color="transparent"
+                                                            class="ma-auto pa-10"
+                                                            flat
+                                                            tile
+                                                        ></v-card>
+                                                    </v-sheet>
+                                                </v-img>
+                                            </template>
+                                        </v-col>
+                                        <v-col
+                                            v-else
+                                            cols="12"
+                                            sm="10"
+                                            :class="(item.card)? 'align-self-stretch px-4 px-sm-3' : 'align-self-stretch px-4 px-sm-0 py-0'"
+                                        >
+                                            <template v-if="item.card">
+                                                <v-card
+                                                    color="transparent"
+                                                    height="100%"
+                                                >
+                                                    <v-img :src="(item.bgImg)? item.bgImg.url : undefined" width="100%" height="100%">
+                                                        <v-sheet
+                                                            v-if="item.contents"
+                                                            v-html="item.contents"
+                                                            :color="(item.bgColor)? item.bgColor : 'transparent'"
+                                                            width="100%"
+                                                            height="100%"
+                                                            class="pa-10"
+                                                        ></v-sheet>
+                                                    </v-img>
+                                                </v-card>
+                                            </template>
+                                            <template v-else>
+                                                <v-img :src="(item.bgImg)? item.bgImg.url : undefined" width="100%" height="100%">
+                                                    <v-sheet
+                                                        :color="(item.bgColor)? item.bgColor : 'transparent'"
+                                                        height="100%"
+                                                        width="100%"
+                                                        class="d-flex"
+                                                        tile
+                                                    >
+                                                        <v-card
+                                                            v-if="item.contents"
+                                                            v-html="item.contents"
+                                                            color="transparent"
+                                                            class="ma-auto pa-10"
+                                                            flat
+                                                            tile
+                                                        ></v-card>
+                                                    </v-sheet>
+                                                </v-img>
+                                            </template>
+                                        </v-col>
                                     </template>
-                                </v-col>
+                                </template>
                             </template>
-                            <v-col v-if="section.section.carousel != ''" cols="12" sm="8" md="6">
-                                <v-carousel hide-delimiters cycle interval="3000" height="auto">
-                                    <v-carousel-item
-                                        v-for="(slide,i) in section.section.carousel"
-                                        :key="i"
-                                        :src="(slide.img)? slide.img.url : undefined"
-                                    ></v-carousel-item>
-                                </v-carousel>
-                            </v-col>
                             <v-col v-if="section.section.movie" cols="12" sm="8" md="6">
                                 <div style="width: 100%;padding-bottom: 56.25%;height: 0px;position: relative;">
                                     <iframe
@@ -236,6 +307,7 @@
 </template>
 
 <script>
+
 export default {
     async asyncData ({ payload, app }) {
         if(payload) {
