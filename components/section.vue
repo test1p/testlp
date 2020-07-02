@@ -373,11 +373,11 @@ export default {
             }
         },
         bgImg () {
-            if (this.section.bgImg2) {
-                var bgImg = this.section.bgImg2.url
+            if (this.section.bgImg) {
+                var bgImg = this.section.bgImg.url
                 if (this.$vuetify.breakpoint.xs) {
-                    if (this.section.bgImg) {
-                        bgImg = this.section.bgImg.url
+                    if (this.section.bgImgS) {
+                        bgImg = this.section.bgImgS.url
                     }
                     return `${bgImg}?fit=clip&w=600`
                 }
