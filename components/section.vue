@@ -16,8 +16,8 @@
             tile
             height="100%"
         >
-            <v-container :id="section.id" :class="(!$route.params.id)? 'py-10' : 'pt-2 pb-10 px-sm-0'" style="height:100%;min-height:50%;">
-                <v-row style="height:100%;" class="justify-center align-center">
+            <v-container :class="(!$route.params.id)? 'py-10' : 'pt-2 pb-10 px-sm-0'" style="height:100%;min-height:50%;">
+                <v-row :id="section.id" style="height:100%;" class="justify-center align-center">
                     <v-col
                         v-if="section.contents"
                         v-html="section.contents"
