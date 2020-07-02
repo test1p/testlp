@@ -9,7 +9,7 @@
         :src="(bgImg)? bgImg : undefined"
         :height="(section.max)? '100vh' : undefined"
         :style="(bgImg)? 'background: white;' : undefined"
-        :max-width="(this.$vuetify.breakpoint.lgAndUp)? '1264px' : '100vw'"
+        :max-width="($vuetify.breakpoint.lgAndUp)? '1264px' : '100vw'"
     >
         <v-sheet
             :color="(bgImg && section.bgColor)? section.bgColor : 'transparent'"
@@ -109,6 +109,8 @@
                                                 <v-card
                                                     color="transparent"
                                                     class="ma-auto pa-5 pa-sm-7"
+                                                    :height="($vuetify.breakpoint.xs)? undefined : '100%'"
+                                                    width="100%"
                                                     flat
                                                     tile
                                                 >
