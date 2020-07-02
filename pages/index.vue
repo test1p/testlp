@@ -122,10 +122,9 @@ export default {
             }
         }
         else if(process.env.NODE_ENV !== 'production') {
-            var layout = await app.$axios.$get(`https://testlp.microcms.io/api/v1/layout?depth=3`, {
+            var layout = await app.$axios.$get(`https://testlp.microcms.io/api/v1/layout/layout`, {
                 headers: { 'X-API-KEY': '000a5261-24c3-4f70-b87b-0d68d2ff256a' }
             })
-            layout = layout.contents[0]
             var sections = layout.layout
             layout = {
                 header: {
