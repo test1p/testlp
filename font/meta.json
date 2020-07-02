@@ -14,5 +14,29 @@
   {
     "name": "circle",
     "codepoint": "F0765"
+  },
+  {
+    "name": "home",
+    "codepoint": "F02DC"
+  },
+  {
+    "name": "menu-down",
+    "codepoint": "F035D"
+  },
+  {
+    "name": "radiobox-blank",
+    "codepoint": "F043D"
+  },
+  {
+    "name": "radiobox-marked",
+    "codepoint": "F043E"
+  },
+  {
+    "name": "checkbox-blank-outline",
+    "codepoint": "F0131"
+  },
+  {
+    "name": "checkbox-marked",
+    "codepoint": "F0132"
   }
 ]

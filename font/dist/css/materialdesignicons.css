@@ -34,6 +34,30 @@
   content: "\F0765";
 }
 
+.mdi-home::before {
+  content: "\F02DC";
+}
+
+.mdi-menu-down::before {
+  content: "\F035D";
+}
+
+.mdi-radiobox-blank::before {
+  content: "\F043D";
+}
+
+.mdi-radiobox-marked::before {
+  content: "\F043E";
+}
+
+.mdi-checkbox-blank-outline::before {
+  content: "\F0131";
+}
+
+.mdi-checkbox-marked::before {
+  content: "\F0132";
+}
+
 .mdi-blank::before {
   content: "\F68C";
   visibility: hidden;
