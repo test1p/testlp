@@ -248,18 +248,17 @@
                             action="/"
                         >
                             <input type="hidden" name="form-name" value="contact">
-                                <v-radio-group
-                                    v-model="radio"
-                                    row
-                                >
-                                    <v-radio
-                                        v-for="radio in radios"
-                                        :key="radio.label"
-                                        :label="radio.label"
-                                        :value="radio.value"
-                                        name="overview"
-                                    ></v-radio>
-                                </v-radio-group>
+                            <div class="d-flex">
+                            <v-checkbox
+                                v-for="selection in selections"
+                                :key="selection.label"
+                                v-model="selected"
+                                :label="selection.label"
+                                :value="selection.value"
+                                name="overview"
+                                class="pr-4"
+                            ></v-checkbox>
+                            </div>
                             <v-combobox
                                 v-model="service"
                                 :items="items"
@@ -337,8 +336,8 @@ export default {
                 'カスタマイズ',
                 'その他',
             ],
-            radio: 'request',
-            radios: [
+            selected: [],
+            selections: [
                 {label: 'お申込', value: 'request'},
                 {label: 'ご質問', value: 'question'},
                 {label: 'お見積', value: 'estimation'},
