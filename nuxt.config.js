@@ -111,15 +111,7 @@ export default {
                     txtColor: (layout.txtColorF)? layout.txtColorF : 'white'
                 }
             }
-            var menus = sections.map((x, i) => {
-                if (x.menu) {
-                    return {
-                        id: i,
-                        title: x.section.title
-                    }
-                }
-            })
-            menus = menus.filter(x => x)
+            var menus = sections.filter(x => x.menu)
             return [{
                 route: '/',
                 payload:{
