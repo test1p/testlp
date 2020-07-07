@@ -1,5 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
-const axios = require("axios"); 
+const axios = require("axios")
+require('dotenv').config()
 
 export default {
     /*
@@ -57,6 +58,7 @@ export default {
         // Doc: https://axios.nuxtjs.org/usage
         '@nuxtjs/axios',
         '@nuxtjs/pwa',
+        '@nuxtjs/dotenv',
     ],
     /*
     ** Axios module configuration
