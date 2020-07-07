@@ -64,7 +64,7 @@
                                     v-if="!item.expand"
                                     cols="12"
                                     :sm="(section.col)? 6 : 6"
-                                    :md="(section.col)? 4 : 6"
+                                    :md="(section.col || section.max)? 4 : 6"
                                     :class="(item.card)? 'align-self-stretch px-4 px-sm-3' : 'align-self-stretch px-4 px-sm-0 py-0'"
                                 >
                                     <template v-if="item.card">
@@ -77,15 +77,17 @@
                                                     :color="(item.bgColor)? item.bgColor : color.item.bg"
                                                     width="100%"
                                                     height="100%"
-                                                    class="pa-5 pa-sm-7"
+                                                    :class="(section.col)? 'pa-5 pa-sm-7 pa-md-5' : 'pa-5 pa-sm-7'"
                                                 >
                                                     <div
                                                         v-if="item.contents"
                                                         v-html="item.contents"
                                                     ></div>
-                                                    <v-row class="py-2 justify-center">
+                                                    <v-row
+                                                        v-if="item.btnLabel && item.btnLink"
+                                                        class="py-2 justify-center"
+                                                    >
                                                         <v-btn
-                                                            v-if="item.btnLabel && item.btnLink"
                                                             @click="move(item.btnLink)"
                                                             :color="color.btn.bg"
                                                             outlined
@@ -98,18 +100,22 @@
                                         </v-card>
                                     </template>
                                     <template v-else>
-                                        <v-img :src="(item.bgImg)? item.bgImg.url : undefined" width="100%" height="100%">
+                                        <v-img
+                                            :src="(item.bgImg)? item.bgImg.url : undefined"
+                                            width="100%"
+                                            height="100%"
+                                        >
                                             <v-sheet
                                                 :color="(item.bgColor)? item.bgColor : color.item.bg"
                                                 height="100%"
                                                 width="100%"
-                                                class="d-flex"
+                                                class="d-flex align-items-center"
                                                 tile
                                             >
                                                 <v-card
                                                     color="transparent"
-                                                    class="ma-auto pa-5 pa-sm-7"
-                                                    :height="($vuetify.breakpoint.xs)? undefined : '100%'"
+                                                    :class="(section.col)? 'ma-auto pa-5 pa-sm-7 pa-md-5' : 'ma-auto pa-5 pa-sm-7'"
+                                                    :height="($vuetify.breakpoint.smAndUp && !section.max)? '100%' : undefined"
                                                     width="100%"
                                                     flat
                                                     tile
@@ -118,9 +124,11 @@
                                                         v-if="item.contents"
                                                         v-html="item.contents"
                                                     ></div>
-                                                    <v-row class="py-2 justify-center">
+                                                    <v-row
+                                                        v-if="item.btnLabel && item.btnLink"
+                                                        class="py-2 justify-center"
+                                                    >
                                                         <v-btn
-                                                            v-if="item.btnLabel && item.btnLink"
                                                             @click="move(item.btnLink)"
                                                             :color="color.btn.bg"
                                                             :style="`color:${color.btn.txt};`"
@@ -155,9 +163,11 @@
                                                         v-if="item.contents"
                                                         v-html="item.contents"
                                                     ></div>
-                                                    <v-row class="py-2 justify-center">
+                                                    <v-row
+                                                        v-if="item.btnLabel && item.btnLink"
+                                                        class="py-2 justify-center"
+                                                    >
                                                         <v-btn
-                                                            v-if="item.btnLabel && item.btnLink"
                                                             @click="move(item.btnLink)"
                                                             :color="color.btn.bg"
                                                             outlined
@@ -189,9 +199,11 @@
                                                         v-if="item.contents"
                                                         v-html="item.contents"
                                                     ></div>
-                                                    <v-row class="py-2 justify-center">
+                                                    <v-row
+                                                        v-if="item.btnLabel && item.btnLink"
+                                                        class="py-2 justify-center"
+                                                    >
                                                         <v-btn
-                                                            v-if="item.btnLabel && item.btnLink"
                                                             @click="move(item.btnLink)"
                                                             :color="color.btn.bg"
                                                             :style="`color:${color.btn.txt};`"
@@ -323,9 +335,9 @@ export default {
     data() {
         return {
             color: {
-                section: {bg: 'rgba(242,242,242,1)'},
+                section: {bg: 'white'},
                 item: {bg: 'white'},
-                btn: {bg: 'rgba(102,153,204,1)', txt: 'white' },
+                btn: {bg: '#cf3e51', txt: 'white' },
                 contact: {input: 'white'}
             },
             service: [],

@@ -20,7 +20,7 @@
               
                 <v-toolbar-title
                     v-if="layout.header.title"
-                    :style="`color: ${layout.header.txtColor};`"
+                    :style="`color: ${layout.header.txtColor};text-transform:none;`"
                 >
                     {{ layout.header.title }}
                 </v-toolbar-title>
@@ -71,7 +71,7 @@
             <div v-else class="d-flex">
                 <v-btn
                     @click="move(menu.section.id)"
-                    :color="layout.header.txtColor"
+                    :color="color.header.contact"
                     :small="$vuetify.breakpoint.sm"
                     class="align-self-center"
                     rounded
@@ -83,13 +83,14 @@
             </div>
             </template>
         </v-toolbar-items>
-        
     </v-app-bar>
+    
     <v-main v-scroll="onScroll">
         <template v-for="(section, i) in sections">
             <Section :section="section.section"></Section>
         </template>
     </v-main>
+    
     <v-footer padless :color="layout.footer.bgColor">
         <v-sheet tile width="100%" color="transparent">
             <v-row class="mx-0 justify-center">
@@ -150,6 +151,11 @@ export default {
     data() {
         return {
             scroll: false,
+            color: {
+                header: {
+                    contact: '#edad0b',
+                }
+            }
         }
     },
     methods: {
