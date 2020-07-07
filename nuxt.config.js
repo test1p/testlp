@@ -18,7 +18,7 @@ export default {
     ** See https://nuxtjs.org/api/configuration-head
     */
     head: {
-        title: process.env.SITE_NAME,
+        title: process.env.NUXT_ENV_SITE_NAME,
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
