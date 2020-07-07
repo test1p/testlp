@@ -84,7 +84,7 @@
             </template>
         </v-toolbar-items>
     </v-app-bar>
-    
+
     <v-main v-scroll="onScroll">
         <template v-for="(section, i) in sections">
             <Section :section="section.section"></Section>
@@ -123,8 +123,8 @@ export default {
             }
         }
         else if(process.env.NODE_ENV !== 'production') {
-            var layout = await app.$axios.$get(`https://testlp.microcms.io/api/v1/layout/layout`, {
-                headers: { 'X-API-KEY': '000a5261-24c3-4f70-b87b-0d68d2ff256a' }
+            var layout = await app.$axios.$get(`https://${process.env.serviceName}.microcms.io/api/v1/layout/layout`, {
+                headers: { 'X-API-KEY': process.env.apiKey }
             })
             var sections = layout.layout
             layout = {
@@ -153,7 +153,7 @@ export default {
             scroll: false,
             color: {
                 header: {
-                    contact: '#edad0b',
+                    contact: process.env.colorContactBtn,
                 }
             }
         }
@@ -180,6 +180,12 @@ export default {
             else {
                 return {offset: 56}
             }
+        }
+    },
+    head () {
+        return {
+            title: process.env.topTitle,
+            titleTemplate: (process.env.topTemplate != '')? process.env.topTemplate : `%s - ${process.env.siteName}`,
         }
     }
 }

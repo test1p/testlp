@@ -1,8 +1,28 @@
 import colors from 'vuetify/es5/util/colors'
 const axios = require("axios")
 require('dotenv').config()
+const serviceName = process.env.NUXT_ENV_SERVICE_NAME
+const apiKey = process.env.NUXT_ENV_API_KEY
+const siteName = process.env.NUXT_ENV_SITE_NAME
+const siteUrl = process.env.NUXT_ENV_SITE_URL
+const siteDesc = process.env.NUXT_ENV_SITE_DESC
+const siteKeywords = process.env.NUXT_ENV_SITE_KEYWORDS
 
 export default {
+    env: {
+        serviceName: serviceName,
+        apiKey: apiKey,
+        siteName: siteName,
+        topTitle: process.env.NUXT_ENV_TOP_TITLE,
+        topTemplate: process.env.NUXT_ENV_TOP_TEMPLATE,
+        colorSectionBg: process.env.NUXT_ENV_COLOR_SECTION_BG,
+        colorItemBg: process.env.NUXT_ENV_COLOR_ITEM_BG,
+        colorBtnBg: process.env.NUXT_ENV_COLOR_BTN_BG,
+        colorBtnTxt: process.env.NUXT_ENV_COLOR_BTN_TXT,
+        colorContactInput: process.env.NUXT_ENV_COLOR_CONTACT_INPUT,
+        colorContactBtn: process.env.NUXT_ENV_COLOR_CONTACT_BTN,
+        
+    },
     /*
     ** Nuxt rendering mode
     ** See https://nuxtjs.org/api/configuration-mode
@@ -18,11 +38,29 @@ export default {
     ** See https://nuxtjs.org/api/configuration-head
     */
     head: {
-        title: process.env.NUXT_ENV_SITE_NAME,
+        htmlAttrs: {
+            prefix: 'og: http://ogp.me/ns#',
+            lang: 'ja'
+        },
+        titleTemplate: `%s - ${siteName}`,
         meta: [
+            // 設定関連
             { charset: 'utf-8' },
+            { 'http-equiv': 'x-ua-compatible', content: 'ie=edge' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+          
+            // SEO関連
+            { hid: 'description', name: 'description', content: siteDesc },
+            { hid: 'keywords', name: 'keywords', content: siteKeywords },
+            
+            // ogp関連
+            { hid: 'og:site_name', property: 'og:site_name', content: siteName },
+            { hid: 'og:type', property: 'og:type', content: 'website' },
+            { hid: 'og:url', property: 'og:url', content: siteUrl },
+            { hid: 'og:title', property: 'og:title', content: siteName },
+            { hid: 'og:description', property: 'og:description', content: siteDesc },
+            { hid: 'og:image', property: 'og:image', content: `${siteUrl}ogp/home.jpg` },
+            { name: 'twitter:card', content: 'summary_large_image' },
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -95,8 +133,8 @@ export default {
     },
     generate: {
         routes: async function () {
-            var layout = await axios.get(`https://testlp.microcms.io/api/v1/layout/layout`, {
-                headers: { 'X-API-KEY': '000a5261-24c3-4f70-b87b-0d68d2ff256a' }
+            var layout = await axios.get(`https://${serviceName}.microcms.io/api/v1/layout/layout`, {
+                headers: { 'X-API-KEY': apiKey }
             })
             layout = layout.data
             var sections = layout.layout

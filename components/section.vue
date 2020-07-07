@@ -335,10 +335,10 @@ export default {
     data() {
         return {
             color: {
-                section: {bg: 'white'},
-                item: {bg: 'white'},
-                btn: {bg: '#cf3e51', txt: 'white' },
-                contact: {input: 'white'}
+                section: {bg: process.env.colorSectionBg},
+                item: {bg: process.env.colorItemBg},
+                btn: {bg: process.env.colorBtnBg, txt: process.env.colorBtnTxt},
+                contact: {input: process.env.colorContactInput}
             },
             service: [],
             items: [
