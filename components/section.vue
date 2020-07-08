@@ -9,7 +9,7 @@
         :src="(bgImg)? bgImg : undefined"
         :height="(section.max)? '100vh' : undefined"
         :style="(bgImg)? 'background: white;' : undefined"
-        :max-width="($vuetify.breakpoint.lgAndUp)? '1264px' : '100vw'"
+        :max-width="($vuetify.breakpoint.lgAndUp && !section.max)? '1264px' : '100vw'"
     >
         <v-sheet
             :color="(bgImg && section.bgColor)? section.bgColor : 'transparent'"
@@ -276,6 +276,7 @@
                                 :key="selection"
                                 v-model="checked"
                                 :label="selection"
+                                :value="selection"
                                 name="overview"
                                 class="pr-4"
                             ></v-checkbox>
@@ -400,13 +401,13 @@ export default {
                     if (this.section.bgImgS) {
                         bgImg = this.section.bgImgS.url
                     }
-                    return `${bgImg}?fit=clip&w=600`
+                    return `${bgImg}?auto=compress&fit=clip&w=600`
                 }
                 else if (this.$vuetify.breakpoint.sm) {
-                    return `${bgImg}?fit=clip&w=960`
+                    return `${bgImg}?auto=compress&fit=clip&w=960`
                 }
                 else {
-                    return `${bgImg}?fit=clip&w=1264`
+                    return `${bgImg}?auto=compress&fit=clip&w=1264`
                 }
             }
         }
