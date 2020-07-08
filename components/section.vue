@@ -90,7 +90,9 @@
                                                         <v-btn
                                                             @click="move(item.btnLink)"
                                                             :color="color.btn.bg"
+                                                            class="title"
                                                             outlined
+                                                            large
                                                         >
                                                             {{ item.btnLabel }}
                                                         </v-btn>
@@ -114,7 +116,7 @@
                                             >
                                                 <v-card
                                                     color="transparent"
-                                                    :class="(section.col)? 'ma-auto pa-5 pa-sm-7 pa-md-5' : 'ma-auto pa-5 pa-sm-7'"
+                                                    :class="(section.col)? 'ma-auto pa-5 pa-sm-7 pa-md-5 d-flex align-center' : 'ma-auto pa-5 pa-sm-7 d-flex align-center'"
                                                     :height="($vuetify.breakpoint.smAndUp && !section.max)? '100%' : undefined"
                                                     width="100%"
                                                     flat
@@ -123,6 +125,7 @@
                                                     <div
                                                         v-if="item.contents"
                                                         v-html="item.contents"
+                                                        class="flex-grow-1"
                                                     ></div>
                                                     <v-row
                                                         v-if="item.btnLabel && item.btnLink"
@@ -132,6 +135,8 @@
                                                             @click="move(item.btnLink)"
                                                             :color="color.btn.bg"
                                                             :style="`color:${color.btn.txt};`"
+                                                            class="title"
+                                                            large
                                                         >
                                                             {{ item.btnLabel }}
                                                         </v-btn>
@@ -170,7 +175,9 @@
                                                         <v-btn
                                                             @click="move(item.btnLink)"
                                                             :color="color.btn.bg"
+                                                            class="title"
                                                             outlined
+                                                            large
                                                         >
                                                             {{ item.btnLabel }}
                                                         </v-btn>
@@ -207,6 +214,8 @@
                                                             @click="move(item.btnLink)"
                                                             :color="color.btn.bg"
                                                             :style="`color:${color.btn.txt};`"
+                                                            class="title"
+                                                            large
                                                         >
                                                             {{ item.btnLabel }}
                                                         </v-btn>
@@ -243,6 +252,7 @@
                             @click="move(section.btnLink)"
                             :color="color.btn.bg"
                             :style="`color:${color.btn.txt};`"
+                            large
                         >
                             {{ section.btnLabel }}
                         </v-btn>
@@ -263,19 +273,18 @@
                             <div class="d-flex">
                             <v-checkbox
                                 v-for="selection in selections"
-                                :key="selection.label"
-                                v-model="selected"
-                                :label="selection.label"
-                                :value="selection.value"
+                                :key="selection"
+                                v-model="checked"
+                                :label="selection"
                                 name="overview"
                                 class="pr-4"
                             ></v-checkbox>
                             </div>
                             <v-combobox
-                                v-model="service"
+                                v-model="selected"
                                 :items="items"
                                 :background-color="color.contact.input"
-                                label="対象プランの選択・入力"
+                                label="プラン選択or概要入力"
                                 name="service[]"
                                 multiple
                                 outlined
@@ -318,6 +327,8 @@
                                 type="submit"
                                 :color="color.btn.bg"
                                 :style="`color:${color.btn.txt};`"
+                                class="title"
+                                large
                             >
                                 送信
                             </v-btn>
@@ -340,19 +351,18 @@ export default {
                 btn: {bg: process.env.colorBtnBg, txt: process.env.colorBtnTxt},
                 contact: {input: process.env.colorContactInput}
             },
-            service: [],
+            selected: [],
             items: [
                 'ベーシック',
                 'スタンダード',
                 'プレミアム',
                 'カスタマイズ',
-                'その他',
             ],
-            selected: [],
+            checked: [],
             selections: [
-                {label: 'お申込', value: 'request'},
-                {label: 'ご質問', value: 'question'},
-                {label: 'お見積', value: 'estimation'},
+                'お申込',
+                'ご質問',
+                'お見積',
             ],
             corporateName: '',
             contactName: '',
